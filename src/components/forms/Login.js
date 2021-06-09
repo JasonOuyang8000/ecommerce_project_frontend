@@ -8,27 +8,35 @@ import {
 } from "@chakra-ui/react"
 import axios from "axios"
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { UserContext } from "../../context/UserContext"
 
 function Login() {
     const [inputs, setInputs] = useState({email:'',password:''})
+    const {user,setUser} = useContext(UserContext);
 
     const handleInputs = (e) => {
         let name = e.target.name
         let value = e.target.value
         setInputs({...inputs, [name]: value})
-
-       
+     
+      
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND}/user/login`,inputs);
+            setUser(response.data.user);
+            localStorage.setItem('usertoken',response.data.userToken);
         }
         catch(error) {
-
+           if (error.response) {
+               console.log(error.response.data.error);
+               return;
+           }
+           console.log(error);
         }
     }
 
@@ -46,7 +54,7 @@ function Login() {
                 <Input name='password' value={inputs.password} type="password" onChange={handleInputs} />
             </FormControl>
 
-            <Button bg='tomato' size='md' m='3'>Submit</Button>
+            <Button type="submit" bg='tomato' size='md' m='3'>Submit</Button>
         </form>
     )
 }

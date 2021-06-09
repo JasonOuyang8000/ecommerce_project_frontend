@@ -21,7 +21,7 @@ function Signup() {
         let name = e.target.name
         let value = e.target.value
         setInputs({...inputs, [name]: value})
-
+        
         
     }
 
