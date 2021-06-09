@@ -6,12 +6,38 @@ import Home from './pages/Home'
 import Products from './pages/Products'
 import User from './pages/User'
 import { UserContext } from './context/UserContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
   const [user, setUser] = useState(null);
 
+  const verifyUser = async () => {  
+    if (localStorage.getItem('usertoken')) {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND}/user/verify`,{
+          headers: {
+            authorization:'Bearer '+ localStorage.getItem('usertoken')
+          }
+        });
+
+        setUser(response.data.user);
   
+      }
+      catch(error) {
+        if (error.response) {
+          console.log(error.response.data.error);
+          return;
+        }
+        console.log(error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    verifyUser();
+  },[])
+
   
 
 
@@ -29,8 +55,15 @@ function App() {
           <Products />
         </Route>
 
+        
         <Route path='/user'>
-          <User />
+          {user === null ? 
+            <User />
+            :
+            <Home />
+          }
+      
+          
         </Route>
       </Switch>
     </div>

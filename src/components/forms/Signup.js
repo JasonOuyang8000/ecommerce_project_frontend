@@ -13,7 +13,7 @@ import { UserContext } from "../../context/UserContext"
 
 function Signup() {
     const [inputs, setInputs] = useState({username:'',email:'',password:''})
-
+    
     const {user,setUser} = useContext(UserContext);
  
 
@@ -32,6 +32,7 @@ function Signup() {
             const response = await axios.post(`${process.env.REACT_APP_BACKEND}/user`,inputs);
             setUser(response.data.user);
             localStorage.setItem('usertoken',response.data.userToken);
+
         }
         catch(error) {
            if (error.response) {
