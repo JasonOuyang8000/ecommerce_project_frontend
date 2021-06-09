@@ -19,6 +19,11 @@ function User() {
                     <Login />
                 </Box>
             </Route>
+            <Route path={`${path}/profile`}>
+                <Box>
+                    Profile Page!
+                </Box>
+            </Route>
         </Switch>
     )
 }
