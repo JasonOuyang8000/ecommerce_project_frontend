@@ -10,12 +10,14 @@ import {
 import { useState } from 'react'
 
 function Signup() {
-    const [inputs, setInputs] = useState({})
+    const [inputs, setInputs] = useState({username:'',email:'',password:''})
 
     const handleInputs = (e) => {
         let name = e.target.name
         let value = e.target.value
         setInputs({...inputs, [name]: value})
+
+        
     }
 
     const handleSubmit = (e) => {

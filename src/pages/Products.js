@@ -7,7 +7,6 @@ function Products() {
     // filter options (items/page)
     // fetch limit items
 
-    useEffect()
 
     return (
         <Box>
