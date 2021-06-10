@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import {
     Box,
+    Container,
     HStack,
     Button,
     Link
@@ -39,12 +40,12 @@ function Pagination({data, dataLimit, pageLimit}) {
     }
 
     useEffect(getPageData, [])
-    useEffect(getPageData, [currentPage])
+    useEffect(getPageData, [currentPage, dataLimit])
     
     return (
-        <>
+        <Container display='flex' flexDirection='column' alignItems='center'>
             {/* show limited items */}
-            <Box display='flex' flexWrap='wrap'>
+            <Box display='flex' flexWrap='wrap' justifyContent='space-between' mb='5' w='70vw'>
                 {pageData.map(item => (
                     <ItemCard key={item.uuid} item={item} />
                 ))}
@@ -73,7 +74,7 @@ function Pagination({data, dataLimit, pageLimit}) {
                     </Button>
                 </HStack>
             </Box>
-        </>
+        </Container>
     )
 }
 
