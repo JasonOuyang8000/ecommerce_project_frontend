@@ -1,12 +1,14 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-import { Box, Heading, Text } from '@chakra-ui/react'
+import { Container, Heading, Text } from '@chakra-ui/react'
 import Pagination from '../components/Pagination'
+import FilterProducts from '../components/FilterProducts'
 
 // filter options (items/page)
 function Products() {
     const [items, setItems] = useState([])
+    const [dataLimit, setDataLimit] = useState(24)
     const [error, setError] = useState('')
 
     // fetch all items
@@ -15,7 +17,7 @@ function Products() {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND}/item`)
 
             if (res.status === 200) {
-                console.log(res.data.message);
+                console.log(res.data);
                 setItems(res.data.items)
             } else {
                 console.log('error in fetchItems');
@@ -29,16 +31,20 @@ function Products() {
     useEffect(fetchItems, [])
 
     return (
-        <Box>
-            <Heading fontSize='3xl'>Products Page</Heading>
+        <Container py='5'>
+            <FilterProducts
+                dataLimit={dataLimit}
+                setDataLimit={setDataLimit}
+            />
+
             {items.length > 0 &&
                 <Pagination
                     data={items}
-                    dataLimit={20}
+                    dataLimit={dataLimit}
                     pageLimit={10}
                 />
             }
-        </Box>
+        </Container>
     )
 }
 

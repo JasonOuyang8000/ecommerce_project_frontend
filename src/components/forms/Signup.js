@@ -31,7 +31,7 @@ function Signup() {
         try {
             const response = await axios.post(`${process.env.REACT_APP_BACKEND}/user`,inputs);
             setUser(response.data.user);
-            localStorage.setItem('usertoken',response.data.userToken);
+            localStorage.setItem('usertoken', response.data.userToken);
 
         }
         catch(error) {
