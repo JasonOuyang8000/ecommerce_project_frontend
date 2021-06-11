@@ -1,5 +1,8 @@
 .App {
   /* text-align: center; */
+  background: rgb(255, 246, 237);
+  min-height: 100vh;
+  font-family: 'Lato', sans-serif;
 }
 
 .App-logo {

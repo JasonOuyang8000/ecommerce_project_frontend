@@ -16,7 +16,7 @@ function ItemCard({item}) {
     }
 
     return (
-        <LinkBox w='24%' mb='3' p='2' border='1px' borderColor='blackAlpha.300' borderRadius='md' pos='relative' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center'>
+        <LinkBox bg='white' w='24%' mb='3' p='2' border='1px' borderColor='blackAlpha.300' borderRadius='md' pos='relative' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center'>
             <Heading  size='sm' noOfLines={2}>
                 <LinkOverlay as={ReactLink} to={`/product/${item.id}`}>
                     {item.name}

@@ -31,7 +31,7 @@ function Products() {
     useEffect(fetchItems, [])
 
     return (
-        <Container py='5'>
+        <Container  maxW='container.xl' py='5'>
             <FilterProducts
                 dataLimit={dataLimit}
                 setDataLimit={setDataLimit}
