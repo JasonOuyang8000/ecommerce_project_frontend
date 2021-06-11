@@ -14,7 +14,9 @@ import {
 
 import ItemCard from '../components/ItemCard'
 
-function Pagination({data, dataLimit, pageLimit}) {
+function Pagination({data, filters, pageLimit}) {
+    const { dataLimit } = filters
+    console.log(data.length);
     const [pages] = useState(Math.round(data.length / dataLimit))
     const [currentPage, setCurrentPage] = useState(1)
     const [pageData, setPageData] = useState([])
@@ -40,14 +42,14 @@ function Pagination({data, dataLimit, pageLimit}) {
     }
 
     useEffect(getPageData, [])
-    useEffect(getPageData, [currentPage, dataLimit])
+    useEffect(getPageData, [currentPage, dataLimit, data])
     
     return (
         <>
             {/* show limited items */}
             <Box display='flex' flexWrap='wrap' justifyContent='space-between' mb='5'>
                 {pageData.map(item => (
-                    <ItemCard key={item.uuid} item={item} />
+                    <ItemCard key={item.id} item={item} />
                 ))}
             </Box>
             <Box>

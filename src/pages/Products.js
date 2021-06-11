@@ -8,8 +8,27 @@ import FilterProducts from '../components/FilterProducts'
 // filter options (items/page)
 function Products() {
     const [items, setItems] = useState([])
-    const [dataLimit, setDataLimit] = useState(24)
+    const [filteredItems, setFilteredItems] = useState([])
+
+    const [filters, setFilters] = useState({
+        dataLimit: 24,
+        minPrice: 0,
+        maxPrice: Infinity
+    })
+
     const [error, setError] = useState('')
+
+    const filterItems = () => { // write a test for this func
+        const filtered = items.filter(i => {
+            if (parseFloat(i.price) > filters.minPrice && parseFloat(i.price) < filters.maxPrice) {
+                console.log(true);
+                return i
+            }
+        })
+        setFilteredItems(filtered)
+    }
+    useEffect(filterItems, [])
+    useEffect(filterItems, [filters])
 
     // fetch all items
     const fetchItems = async () => {
@@ -33,14 +52,14 @@ function Products() {
     return (
         <Container  maxW='container.xl' py='5'>
             <FilterProducts
-                dataLimit={dataLimit}
-                setDataLimit={setDataLimit}
+                filters={filters}
+                setFilters={setFilters}
             />
 
             {items.length > 0 &&
                 <Pagination
-                    data={items}
-                    dataLimit={dataLimit}
+                    data={filteredItems}
+                    filters={filters}
                     pageLimit={10}
                 />
             }
