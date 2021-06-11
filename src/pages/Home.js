@@ -1,4 +1,6 @@
 import { Box, Container, Flex, Spacer, Image, Text, Button } from "@chakra-ui/react";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ItemCardHome from "../components/ItemCardHome";
@@ -78,10 +80,14 @@ function Home() {
                         }}
                     >
                         
-                        <h1>
-                            <Text mb="4" fontWeight='600' color="white" fontSize="65px" >Products</Text>
-                            <Text mb="20" textAlign='center' fontWeight='600' color="white" fontSize="24px" >Shop Till You Drop</Text>
-                        </h1>
+                        <Box>
+                            <Box display='flex' alignItems='center'>
+                                <Text mr="3"  fontWeight='600' color="white" fontSize="65px" >Products</Text>
+                                <FontAwesomeIcon size="3x" color="white" icon={faShoppingBag}/>
+                            </Box>
+                            
+                            <Text mb="20" textAlign='center' fontWeight='600' color="#F8F7F2" fontSize="24px" >Shop Till You Drop</Text>
+                        </Box>
                
 
                     </div>

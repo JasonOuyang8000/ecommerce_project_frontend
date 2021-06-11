@@ -8,6 +8,7 @@ import { // Drawer needs fixing!
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
+    useDisclosure,
 } from "@chakra-ui/react"
 import {
     Container,
@@ -23,7 +24,7 @@ import {
 } from '@chakra-ui/react'
 
 function FilterProducts({dataLimit, setDataLimit}) {
-    const { isOpen, onOpen, onClose }
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
 
     const [maxPrice, setMaxPrice] = useState(null)

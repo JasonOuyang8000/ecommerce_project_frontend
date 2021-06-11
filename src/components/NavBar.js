@@ -10,7 +10,9 @@ import {
     MenuList,
     MenuGroup,
     MenuDivider,
-    MenuItem
+    MenuItem,
+    Container,
+    Text
 } from '@chakra-ui/react'
 
 import {
@@ -19,6 +21,10 @@ import {
 
 import { Link as ReactLink, useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
+import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 
 function NavBar() {
     const history = useHistory()
@@ -31,8 +37,19 @@ function NavBar() {
     }
 
     return (
-        <Box bg='tomato' w='100%' px='5' py='1' display='flex' alignItems='center' justifyContent='space-between'>
+        <Box bg='tomato' w='100%'>
+        <Container   maxW='container.xl'>
+        <Box  px='5' py='1' display='flex' alignItems='center' justifyContent='space-between'>
+         
             <HStack spacing='5'>
+                <Link display="flex" alignItems="center" mr="6" as={ReactLink} to='/'
+                    _hover={{
+                        textDecoration: 'none',
+                        color: 'gray.600'
+                    }}>
+                     
+                    <Text display="inline" fontWeight="900" fontSize="20px" mr="2" color="white">Products</Text><FontAwesomeIcon color="white" size="lg" icon={faShoppingBag}/>
+                </Link>
                 <Link as={ReactLink} to='/'
                     _hover={{
                         textDecoration: 'none',
@@ -92,8 +109,13 @@ function NavBar() {
                     </MenuGroup>
                 </MenuList>
             </Menu>
+        
+        </Box>
+        </Container>
         </Box>
     )
 }
+
+
 
 export default NavBar
