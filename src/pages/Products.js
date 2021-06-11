@@ -27,7 +27,7 @@ function Products() {
         })
         setFilteredItems(filtered)
     }
-    useEffect(filterItems, [])
+    useEffect(filterItems, [items])
     useEffect(filterItems, [filters])
 
     // fetch all items
