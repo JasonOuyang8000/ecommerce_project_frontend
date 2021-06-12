@@ -8,9 +8,12 @@ import User from './pages/User'
 import { UserContext } from './context/UserContext';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { CartContext } from './context/CartContext';
+import GlobalCart from './components/GlobalCart';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]);
 
   const verifyUser = async () => {  
     if (localStorage.getItem('usertoken')) {
@@ -34,18 +37,39 @@ function App() {
     }
   }
 
+
+  const loadCart = () => {
+    if (localStorage.getItem('cartItems')) {
+      const localItems = JSON.parse(localStorage.getItem('cartItems'));
+      setCart(localItems);
+    }
+    else {
+
+      localStorage.setItem('cartItems', JSON.stringify(cart));
+    }
+  }
+
   useEffect(() => {
-    verifyUser();
+    loadCart()
+    verifyUser()
   },[])
 
-  
 
+  useEffect(() => {
+    console.log(cart);
+    console.log(JSON.stringify(cart));
+    localStorage.setItem('cartItems', JSON.stringify(cart))
+
+  },[ cart ])
+ 
+  console.log(cart);
 
   return (
+    <CartContext.Provider value={{cart,setCart}}>
     <UserContext.Provider value={{user,setUser}}>
     <div className="App">
       <NavBar />
-
+      <GlobalCart cart={cart} setCart={setCart} />
       <Switch>
         <Route exact path='/'>
           <Home />
@@ -68,6 +92,7 @@ function App() {
       </Switch>
     </div>
     </UserContext.Provider>
+    </CartContext.Provider>
   );
 }
 
