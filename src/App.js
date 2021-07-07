@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { CartContext } from './context/CartContext';
 import GlobalCart from './components/GlobalCart';
+import CartPage from './pages/CartPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -77,6 +78,10 @@ function App() {
 
         <Route exact path='/products'>
           <Products />
+        </Route>
+
+        <Route exact path="/cart">
+          <CartPage />
         </Route>
 
         
