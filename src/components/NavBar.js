@@ -81,7 +81,7 @@ function NavBar() {
 
                 <MenuList>
                     <MenuGroup title='Cart'>
-                        <MenuItem as={ReactLink}>View Cart</MenuItem>
+                        <MenuItem as={ReactLink} to='/cart'>View Cart</MenuItem>
                         <MenuItem as={ReactLink}>Checkout</MenuItem>
                         <MenuItem as={ReactLink}>Orders</MenuItem>
                     </MenuGroup>
